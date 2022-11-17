@@ -39,7 +39,7 @@ abstract class VideoPlayerPlatform extends PlatformInterface {
   ///
   /// This method is called when the plugin is first initialized
   /// and on every full restart.
-  Future<void> init() {
+  Future<void> init(bool controlAVAudioSession) {
     throw UnimplementedError('init() has not been implemented.');
   }
 
@@ -99,7 +99,7 @@ abstract class VideoPlayerPlatform extends PlatformInterface {
   }
 
   /// Sets the audio mode to mix with other sources
-  Future<void> setMixWithOthers(bool mixWithOthers) {
+  Future<void> setMixWithOthers(bool mixWithOthers, bool controlAVAudioSesson) {
     throw UnimplementedError('setMixWithOthers() has not been implemented.');
   }
 }
@@ -356,10 +356,10 @@ class VideoPlayerOptions {
   // in all of the other video player packages, fix this, and then update
   // the other packages to use const.
   // ignore: prefer_const_constructors_in_immutables
-  VideoPlayerOptions({
-    this.mixWithOthers = false,
-    this.allowBackgroundPlayback = false,
-  });
+  VideoPlayerOptions(
+      {this.mixWithOthers = false,
+      this.allowBackgroundPlayback = false,
+      this.controlAVAudioSession = true});
 
   /// Set this to true to keep playing video in background, when app goes in background.
   /// The default value is false.
@@ -371,4 +371,6 @@ class VideoPlayerOptions {
   /// Note: This option will be silently ignored in the web platform (there is
   /// currently no way to implement this feature in this platform).
   final bool mixWithOthers;
+
+  final bool controlAVAudioSession;
 }
